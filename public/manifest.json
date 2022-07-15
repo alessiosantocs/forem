@@ -29,7 +29,7 @@
       "type": "image/png"
     }
   ],
-  "name": "Twitter",
+  "name": "HYNS",
   "screenshots": [
     {
       "src": "https://abs.twimg.com/responsive-web/client-web/twitter-lite-data-saver-marketing.68059868.png",
@@ -115,8 +115,8 @@
       ]
     }
   ],
-  "short_name": "Twitter",
-  "start_url": "https://twitter.com/?utm_source=homescreen&utm_medium=shortcut",
+  "short_name": "HYNS",
+  "start_url": "https://forem-dev.herokuapp.com/?utm_source=homescreen&utm_medium=shortcut",
   "theme_color": "#ffffff",
   "scope": "/",
   "android_package_name": "com.twitter.android",
