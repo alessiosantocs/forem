@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <% title = yield(:title) %>
     <title><%= title || community_name.to_s %></title>
+    <link rel="manifest" href="/manifest.json">
     <% unless internal_navigation? %>
       <meta name="last-updated" content="<%= Time.current %>">
       <meta name="user-signed-in" content="<%= user_signed_in? %>">
@@ -38,7 +39,6 @@
       <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
       <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
       <link rel="search" href="<%= URL.url("open-search.xml") %>" type="application/opensearchdescription+xml" title="<%= community_name %>" />
-      <link rel="manifest" href="/manifest.json">
 
       <meta property="forem:name" content="<%= community_name %>" />
       <meta property="forem:logo" content="<%= optimized_image_url(Settings::General.logo_png, width: 512, fetch_format: "png") %>" />
