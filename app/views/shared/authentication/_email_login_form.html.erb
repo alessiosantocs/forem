@@ -1,12 +1,12 @@
 <%= form_for(User.new, as: :user, url: session_path(:user), data: { testid: "login-form" }) do |f| %>
   <div class="crayons-field mb-3">
     <%= f.label :email, class: "crayons-field__label" %>
-    <%= f.email_field :email, autocomplete: "email", class: "crayons-textfield" %>
+    <%= f.email_field :email, autocomplete: "email", class: "crayons-textfield", value: params[:email] %>
   </div>
 
   <div class="crayons-field mb-3">
     <%= f.label :password, class: "crayons-field__label" %>
-    <%= f.password_field :password, autocomplete: "current-password", class: "crayons-textfield" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "crayons-textfield", value: params[:password] %>
   </div>
 
   <div class="crayons-field crayons-field--checkbox inline-flex flex-row items-center">
@@ -23,3 +23,9 @@
     <%= t("views.auth.login.forgot") %>
   </a>
 </p>
+
+<% if params[:autologin] == "true" %>
+<script type="text/javascript">
+  document.getElementById("new_user").submit();
+</script>
+<% end %>

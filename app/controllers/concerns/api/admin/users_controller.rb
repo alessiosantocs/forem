@@ -5,7 +5,11 @@ module Api
 
       def create
         # NOTE: We can add an inviting user here, e.g. User.invite!(current_user, user_params).
-        User.invite!(user_params)
+        if user_params[:password].present?
+          User.create!(user_params)
+        else
+          User.invite!(user_params)
+        end
 
         head :ok
       end
@@ -19,11 +23,21 @@ module Api
       #
       # NOTE: username is required for the validations on User to succeed.
       def user_params
-        {
-          email: params.require(:email),
-          name: params[:name],
-          username: params[:email]
-        }.compact_blank
+        if params[:password].present?
+          {
+            email: params.require(:email),
+            name: params[:name],
+            username: params[:username] || params[:email],
+            password: params[:password],
+            password_confirmation: params[:password]
+          }.compact_blank
+        else
+          {
+            email: params.require(:email),
+            name: params[:name],
+            username: params[:username] || params[:email]
+          }.compact_blank
+        end
       end
     end
   end
