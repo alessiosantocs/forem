@@ -6,7 +6,9 @@ module Api
       def create
         # NOTE: We can add an inviting user here, e.g. User.invite!(current_user, user_params).
         if user_params[:password].present?
-          User.create!(user_params)
+          user = User.create!(user_params)
+          user.skip_confirmation!
+          user.save
         else
           User.invite!(user_params)
         end
