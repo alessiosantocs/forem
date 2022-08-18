@@ -6,9 +6,7 @@ module Api
       def create
         # NOTE: We can add an inviting user here, e.g. User.invite!(current_user, user_params).
         if user_params[:password].present?
-          user = User.create!(user_params)
-          user.skip_confirmation!
-          user.save
+          User.create!(user_params)
         else
           User.invite!(user_params)
         end
@@ -31,7 +29,8 @@ module Api
             name: params[:name],
             username: params[:username] || params[:email],
             password: params[:password],
-            password_confirmation: params[:password]
+            password_confirmation: params[:password],
+            confirmed_at: Time.now.utc
           }.compact_blank
         else
           {
