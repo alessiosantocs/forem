@@ -4,14 +4,15 @@ module Api
       extend ActiveSupport::Concern
 
       def create
+        user = nil
         # NOTE: We can add an inviting user here, e.g. User.invite!(current_user, user_params).
         if user_params[:password].present?
-          User.create!(user_params)
+          user=User.create!(user_params)
         else
-          User.invite!(user_params)
+          user=User.invite!(user_params)
         end
 
-        head :ok
+        render json: user
       end
 
       private
