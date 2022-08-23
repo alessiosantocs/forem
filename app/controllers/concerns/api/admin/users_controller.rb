@@ -16,12 +16,22 @@ module Api
       end
 
       def banish
-        Moderator::BanishUserWorker.perform_async(@user.id, params[:user_id].to_i)
+        if params[:user_id] == 'by_email'
+          @user_to_banish = User.find_by_email!(params.require(:email))
+        else
+          @user_to_banish = User.find(params[:user_id])
+        end
+        Moderator::BanishUserWorker.perform_async(@user.id, @user_to_banish.id)
         head :ok
       end
 
       def full_delete
-        @user_to_delete = User.find(params[:user_id])
+        if params[:user_id] == 'by_email'
+          @user_to_delete = User.find_by_email!(params.require(:email))
+        else
+          @user_to_delete = User.find(params[:user_id])
+        end
+
         Moderator::DeleteUser.call(user: @user_to_delete)
         head :ok
       end
