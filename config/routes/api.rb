@@ -1,5 +1,8 @@
 namespace :admin do
-  resources :users, only: [:create]
+  resources :users, only: [:create] do
+    post "banish"
+    post "full_delete"
+  end
 end
 
 resources :articles, only: %i[index show create update] do

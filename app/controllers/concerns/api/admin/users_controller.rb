@@ -15,6 +15,17 @@ module Api
         render json: user
       end
 
+      def banish
+        Moderator::BanishUserWorker.perform_async(@user.id, params[:user_id].to_i)
+        head :ok
+      end
+
+      def full_delete
+        @user_to_delete = User.find(params[:user_id])
+        Moderator::DeleteUser.call(user: @user_to_delete)
+        head :ok
+      end
+
       private
 
       # Given that we expect creators to use tools (e.g. their existing SSO,
