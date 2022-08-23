@@ -22,7 +22,8 @@ module Api
           @user_to_banish = User.find(params[:user_id])
         end
         Moderator::BanishUserWorker.perform_async(@user.id, @user_to_banish.id)
-        head :ok
+
+        render json: {}
       end
 
       def full_delete
@@ -33,7 +34,8 @@ module Api
         end
 
         Moderator::DeleteUser.call(user: @user_to_delete)
-        head :ok
+
+        render json: {}
       end
 
       private
