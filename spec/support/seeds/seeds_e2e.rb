@@ -42,7 +42,8 @@ seeder.create_if_doesnt_exist(User, "email", "admin@forem.local") do
     username: "Admin_McAdmin",
     profile_image: File.open(Rails.root.join("app/assets/images/#{rand(1..40)}.png")),
     confirmed_at: Time.current,
-    registered_at: Time.current,
+    registered_at: "2020-01-01T13:09:47+0000",
+    created_at: "2020-01-01T13:09:47+0000",
     password: "password",
     password_confirmation: "password",
     saw_onboarding: true,
@@ -199,7 +200,7 @@ seeder.create_if_doesnt_exist(User, "email", "moderator-user@forem.local") do
 
   user.profile.update(website_url: Faker::Internet.url)
 
-  user.add_role(:moderator)
+  user.add_role(:super_moderator)
   user.add_role(:trusted)
 end
 
@@ -529,7 +530,7 @@ seeder.create_if_none(NavigationLink) do
     name: "Reading List",
     url: "#{base_url}/readinglist",
     icon: reading_icon,
-    display_only_when_signed_in: true,
+    display_to: :logged_in,
     position: 0,
     section: :default,
   )
