@@ -1,5 +1,6 @@
 export * from './ArticleCoverImage';
 export * from './ContentTitle';
+export * from './ContentBody';
 export * from './CommentsCount';
 export * from './CommentsList';
 export * from './Meta';

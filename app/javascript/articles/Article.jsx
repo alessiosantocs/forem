@@ -6,6 +6,7 @@ import {
   CommentsCount,
   CommentsList,
   ContentTitle,
+  ContentBody,
   Meta,
   SaveButton,
   SearchSnippet,
@@ -46,6 +47,9 @@ export const Article = ({
 
   // pinned article can have a cover image
   showCover = showCover || (article.pinned && article.main_image);
+
+  let showTitle = feedStyle !== 'facebook';
+  let showBody = feedStyle === 'facebook';
 
   return (
     <article
@@ -107,7 +111,8 @@ export const Article = ({
           </div>
 
           <div className="crayons-story__indention">
-            <ContentTitle article={article} />
+            {showTitle && <ContentTitle article={article} />}
+            {showBody && <ContentBody article={article} />}
             <TagList tags={article.tag_list} flare_tag={article.flare_tag} />
 
             {article.class_name === 'Article' && (
