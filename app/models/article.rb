@@ -336,7 +336,7 @@ class Article < ApplicationRecord
   }
 
   scope :limited_column_select, lambda {
-    select(:path, :title, :id, :published,
+    select(:path, :title, :id, :processed_html, :published,
            :comments_count, :public_reactions_count, :cached_tag_list,
            :main_image, :main_image_background_hex_color, :updated_at, :slug,
            :video, :user_id, :organization_id, :video_source_url, :video_code,
@@ -584,6 +584,14 @@ class Article < ApplicationRecord
     doc = Nokogiri::HTML.fragment(processed_html)
     doc.search(".highlight__panel").each(&:remove)
     doc.to_html
+  end
+
+  def safe_processed_html
+    processed_html.html_safe
+  end
+
+  def safe_plain_html
+    plain_html.html_safe
   end
 
   def followers
