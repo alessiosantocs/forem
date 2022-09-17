@@ -178,6 +178,8 @@ class ApplicationController < ActionController::Base
                            signin_param
                          end
 
+      uri.query_values = uri.query_values.select{|key| key != 'i'}
+
       uri.to_s
     else
       referrer = request.env["omniauth.origin"] || "none"
