@@ -21,7 +21,8 @@ class StoriesController < ApplicationController
   before_action :set_cache_control_headers, only: %i[index show]
   before_action :redirect_to_lowercase_username, only: %i[index]
 
-  rescue_from ArgumentError, with: :bad_request
+  # Temp disabling to identify root cause of bug
+  # rescue_from ArgumentError, with: :bad_request
 
   def index
     @page = (params[:page] || 1).to_i

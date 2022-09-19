@@ -54,7 +54,8 @@ module Api
             username: params[:username] || params[:email],
             password: params[:password],
             password_confirmation: params[:password],
-            confirmed_at: Time.now.utc
+            confirmed_at: Time.now.utc,
+            registered_at: Time.now.utc
           }.compact_blank
         else
           {
