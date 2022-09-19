@@ -22,7 +22,7 @@ class StoriesController < ApplicationController
   before_action :redirect_to_lowercase_username, only: %i[index]
 
   # Temp disabling to identify root cause of bug
-  # rescue_from ArgumentError, with: :bad_request
+  rescue_from ArgumentError, with: :bad_request
 
   def index
     @page = (params[:page] || 1).to_i
