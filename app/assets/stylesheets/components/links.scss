@@ -51,6 +51,10 @@
   }
 }
 
+.c-link__icon{
+  fill: var(--color);
+}
+
 .c-link {
   --bg: var(--link-bg);
   --bg-hover: var(--link-bg-hover);
