@@ -25,7 +25,13 @@ module Api
     def suspend
       authorize(@user, :toggle_suspension_status?)
 
-      target_user = User.find(params[:id])
+      target_user = if params[:id] == "by_username"
+                User.find_by!(username: params[:url])
+              elsif params[:id] == "by_email"
+                User.find_by!(email: params[:email])
+              else
+                User.find(params[:id])
+              end
       suspend_params = { note_for_current_role: params[:note], user_status: "Suspended" }
 
       begin
