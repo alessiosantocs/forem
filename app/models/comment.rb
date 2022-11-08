@@ -35,6 +35,7 @@ class Comment < ApplicationRecord
   before_create :adjust_comment_parent_based_on_depth
   after_create :after_create_checks
   after_create :notify_slack_channel_about_warned_users
+  after_create :notify_slack_channel_about_new_comment
   after_update :update_descendant_notifications, if: :deleted
   after_update :remove_notifications, if: :remove_notifications?
   before_destroy :before_destroy_actions
@@ -351,6 +352,10 @@ class Comment < ApplicationRecord
 
   def notify_slack_channel_about_warned_users
     Slack::Messengers::CommentUserWarned.call(comment: self)
+  end
+
+  def notify_slack_channel_about_new_comment
+    Slack::Messengers::NewComment.call(comment: self)
   end
 
   def parent_exists?
