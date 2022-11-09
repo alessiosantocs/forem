@@ -10,10 +10,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
   let(:headers) { { "content-type" => "application/json", "Accept" => "application/vnd.forem.api-v1+json" } }
   let(:auth_headers) { headers.merge({ "api-key" => api_secret.secret }) }
 
-  before do
-    stub_const("FlareTag::FLARE_TAG_IDS_HASH", { "discuss" => tag.id })
-    allow(FeatureFlag).to receive(:enabled?).with(:api_v1).and_return(true)
-  end
+  before { stub_const("FlareTag::FLARE_TAG_IDS_HASH", { "discuss" => tag.id }) }
 
   describe "GET /api/articles" do
     before { article }
@@ -271,7 +268,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
       end
 
       it "returns rising articles" do
-        article.update_columns(public_reactions_count: 32, score: 1, featured_number: 2.days.ago.to_i)
+        article.update_columns(public_reactions_count: 32, score: 1, published_at: 2.days.ago)
 
         get api_articles_path(state: "rising"), headers: headers
         expect(response.parsed_body.size).to eq(1)
@@ -317,6 +314,16 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
         get api_articles_path, headers: headers
         expect(response).to have_http_status(:ok)
+      end
+
+      it "respects API_PER_PAGE_MAX limit set in ENV variable" do
+        allow(ApplicationConfig).to receive(:[]).and_return(nil)
+        allow(ApplicationConfig).to receive(:[]).with("APP_PROTOCOL").and_return("http://")
+        allow(ApplicationConfig).to receive(:[]).with("API_PER_PAGE_MAX").and_return(2)
+
+        create_list(:article, 3, tags: "discuss", public_reactions_count: 1, score: 1, published: true, featured: true)
+        get api_articles_path, params: { per_page: 10 }, headers: headers
+        expect(response.parsed_body.count).to eq(2)
       end
     end
   end
@@ -1167,6 +1174,8 @@ RSpec.describe "Api::V1::Articles", type: :request do
     let(:path) { api_article_unpublish_path(published_article.id) }
 
     before { Audit::Subscribe.listen listener }
+
+    after { Audit::Subscribe.forget listener }
 
     context "when unauthorized" do
       it "fails with no api key" do

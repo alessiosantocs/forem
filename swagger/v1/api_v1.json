@@ -3,7 +3,7 @@
   "info": {
     "title": "Forem API V1",
     "version": "1.0.0",
-    "description": "Access Forem articles, users and other resources via API.\n        For a real-world example of Forem in action, check out [DEV](https://www.dev.to).\n        All endpoints can be accessed with the 'api-key' header and a accept header, but \n        some of them are accessible publicly without authentication.\n\n        Dates and date times, unless otherwise specified, must be in\n        the [RFC 3339](https://tools.ietf.org/html/rfc3339) format."
+    "description": "Access Forem articles, users and other resources via API.\n        For a real-world example of Forem in action, check out [DEV](https://www.dev.to).\n        All endpoints can be accessed with the 'api-key' header and a accept header, but\n        some of them are accessible publicly without authentication.\n\n        Dates and date times, unless otherwise specified, must be in\n        the [RFC 3339](https://tools.ietf.org/html/rfc3339) format."
   },
   "paths": {
     "/api/articles": {
@@ -103,45 +103,45 @@
                 "example": [
                   {
                     "type_of": "article",
-                    "id": 1357,
-                    "title": "Ego Dominus Tuus168",
-                    "description": "Blog pour-over taxidermy pbr&amp;b bitters. Synth chia pork belly butcher.  Mumblecore 8-bit banh mi...",
-                    "readable_publish_date": "Aug 20",
-                    "slug": "ego-dominus-tuus168-32d5",
-                    "path": "/username372/ego-dominus-tuus168-32d5",
-                    "url": "http://localhost:3000/username372/ego-dominus-tuus168-32d5",
+                    "id": 1,
+                    "title": "Mr Standfast1",
+                    "description": "Fixie crucifix vegan vinyl cleanse stumptown. Ennui chicharrones actually heirloom taxidermy selfies...",
+                    "readable_publish_date": "Sep 3",
+                    "slug": "mr-standfast1-o1j",
+                    "path": "/username1/mr-standfast1-o1j",
+                    "url": "http://localhost:3000/username1/mr-standfast1-o1j",
                     "comments_count": 0,
                     "public_reactions_count": 0,
                     "collection_id": null,
-                    "published_timestamp": "2022-08-19T16:09:09Z",
+                    "published_timestamp": "2022-09-02T19:24:23Z",
                     "positive_reactions_count": 0,
-                    "cover_image": "http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png",
-                    "social_image": "http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png",
-                    "canonical_url": "http://localhost:3000/username372/ego-dominus-tuus168-32d5",
-                    "created_at": "2022-08-19T16:09:09Z",
+                    "cover_image": "http://localhost:3000/assets/19-ed58d3e8defcefc445020631589697a05e725243e834b5192aee4e6b91a3e927.png",
+                    "social_image": "http://localhost:3000/assets/19-ed58d3e8defcefc445020631589697a05e725243e834b5192aee4e6b91a3e927.png",
+                    "canonical_url": "http://localhost:3000/username1/mr-standfast1-o1j",
+                    "created_at": "2022-09-02T19:24:24Z",
                     "edited_at": null,
                     "crossposted_at": null,
-                    "published_at": "2022-08-19T16:09:09Z",
-                    "last_comment_at": "2022-08-19T16:09:09Z",
+                    "published_at": "2022-09-02T19:24:23Z",
+                    "last_comment_at": "2022-09-02T19:24:23Z",
                     "reading_time_minutes": 1,
                     "tag_list": ["discuss"],
                     "tags": "discuss",
                     "user": {
-                      "name": "Kyla \"Avery\" \\:/ Morissette",
-                      "username": "username372",
-                      "twitter_username": "twitter372",
-                      "github_username": "github372",
-                      "user_id": 3080,
+                      "name": "Lavona \"Lenna\" \\:/ Watsica",
+                      "username": "username1",
+                      "twitter_username": "twitter1",
+                      "github_username": "github1",
+                      "user_id": 1,
                       "website_url": null,
-                      "profile_image": "/uploads/user/profile_image/3080/001a3d7d-c716-43aa-a46a-8c024888daf9.jpeg",
-                      "profile_image_90": "/uploads/user/profile_image/3080/001a3d7d-c716-43aa-a46a-8c024888daf9.jpeg"
+                      "profile_image": "/uploads/user/profile_image/1/4e030890-caa7-4c5b-836a-432e7b1bfdfc.jpeg",
+                      "profile_image_90": "/uploads/user/profile_image/1/4e030890-caa7-4c5b-836a-432e7b1bfdfc.jpeg"
                     },
                     "organization": {
-                      "name": "Koss and Sons",
-                      "username": "org56",
-                      "slug": "org56",
-                      "profile_image": "/uploads/organization/profile_image/507/464b6b16-79e1-4378-a9fc-76c81403f9e1.png",
-                      "profile_image_90": "/uploads/organization/profile_image/507/464b6b16-79e1-4378-a9fc-76c81403f9e1.png"
+                      "name": "Weimann-Toy",
+                      "username": "org1",
+                      "slug": "org1",
+                      "profile_image": "/uploads/organization/profile_image/1/2df76e17-f420-434a-8027-2e90ebfb89bf.png",
+                      "profile_image_90": "/uploads/organization/profile_image/1/2df76e17-f420-434a-8027-2e90ebfb89bf.png"
                     },
                     "flare_tag": {
                       "name": "discuss",
@@ -204,6 +204,132 @@
                 "example": {
                   "error": "not found",
                   "status": 404
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reactions/toggle": {
+      "post": {
+        "summary": "toggle reaction",
+        "tags": ["reactions"],
+        "description": "This endpoint allows the client to toggle the user's reaction to a specified reactable (eg, Article, Comment, or User). For examples:\n        * \"Like\"ing an Article will create a new \"like\" Reaction from the user for that Articles\n        * \"Like\"ing that Article a second time will remove the \"like\" from the user",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["like", "readinglist", "unicorn", "thinking", "hands"]
+            }
+          },
+          {
+            "name": "reactable_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "reactable_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["Comment", "Article", "User"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "result": "create",
+                  "category": "like",
+                  "id": 1,
+                  "reactable_id": 5,
+                  "reactable_type": "Article"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "unauthorized",
+                  "status": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reactions": {
+      "post": {
+        "summary": "create reaction",
+        "tags": ["reactions"],
+        "description": "This endpoint allows the client to create a reaction to a specified reactable (eg, Article, Comment, or User). For examples:\n        * \"Like\"ing an Article will create a new \"like\" Reaction from the user for that Articles\n        * \"Like\"ing that Article a second time will return the previous \"like\"",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["like", "readinglist", "unicorn", "thinking", "hands"]
+            }
+          },
+          {
+            "name": "reactable_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "reactable_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["Comment", "Article", "User"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "result": "none",
+                  "category": "like",
+                  "id": 3,
+                  "reactable_id": 7,
+                  "reactable_type": "Article"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "unauthorized",
+                  "status": 401
                 }
               }
             }
@@ -347,7 +473,7 @@
         "in": "query",
         "name": "per_page",
         "required": false,
-        "description": "Page size (the number of items to return per page)",
+        "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
@@ -360,7 +486,7 @@
         "in": "query",
         "name": "per_page",
         "required": false,
-        "description": "Page size (the number of items to return per page)",
+        "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
@@ -373,7 +499,7 @@
         "in": "query",
         "name": "per_page",
         "required": false,
-        "description": "Page size (the number of items to return per page)",
+        "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
@@ -386,7 +512,7 @@
         "in": "query",
         "name": "per_page",
         "required": false,
-        "description": "Page size (the number of items to return per page)",
+        "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
@@ -399,7 +525,7 @@
         "in": "query",
         "name": "per_page",
         "required": false,
-        "description": "Page size (the number of items to return per page)",
+        "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
