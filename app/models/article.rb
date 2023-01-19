@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include ArticleSpaces
   include CloudinaryHelper
   include ActionView::Helpers
   include Reactable

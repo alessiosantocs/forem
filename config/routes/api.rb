@@ -2,6 +2,7 @@ namespace :admin do
   resources :users, only: [:create] do
     post "banish"
     post "full_delete"
+    post "add_to_space"
   end
 end
 

@@ -10,7 +10,7 @@ class ArticlePolicy < ApplicationPolicy
   #      "most relevant" class.
   # @see https://github.com/orgs/forem/projects/46 for project details
   def self.limit_post_creation_to_admins?
-    FeatureFlag.enabled?(:limit_post_creation_to_admins)
+    Current.space.limit_post_creation_to_admins #FeatureFlag.enabled?(:limit_post_creation_to_admins)
   end
 
   # @param query [Symbol] the name of one of the ArticlePolicy action predicates (e.g. :create?,

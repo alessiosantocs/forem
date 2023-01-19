@@ -2,6 +2,7 @@ class User < ApplicationRecord
   resourcify
   rolify
 
+  include UserSpaces
   include CloudinaryHelper
 
   include Images::Profile.for(:profile_image_url)

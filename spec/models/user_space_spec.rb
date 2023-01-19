@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Space, type: :model do
+RSpec.describe UserSpace, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

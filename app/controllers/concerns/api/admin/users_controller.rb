@@ -15,6 +15,18 @@ module Api
         render json: user
       end
 
+      def add_to_space
+        if params[:user_id] == 'by_email'
+          @user_to_add_to_space = User.find_by_email!(params.require(:email))
+        else
+          @user_to_add_to_space = User.find(params[:user_id])
+        end
+
+        Spaces::AddToSpaceWorker.perform_async(@user_to_add_to_space.id, params[:space_id])
+
+        render json: {}
+      end
+
       def banish
         if params[:user_id] == 'by_email'
           @user_to_banish = User.find_by_email!(params.require(:email))
@@ -55,13 +67,15 @@ module Api
             password: params[:password],
             password_confirmation: params[:password],
             confirmed_at: Time.now.utc,
-            registered_at: Time.now.utc
+            registered_at: Time.now.utc,
+            _skip_add_to_default_space: params[:_skip_add_to_default_space],
           }.compact_blank
         else
           {
             email: params.require(:email),
             name: params[:name],
-            username: params[:username] || params[:email]
+            username: params[:username] || params[:email],
+            _skip_add_to_default_space: params[:_skip_add_to_default_space], # Will this work?
           }.compact_blank
         end
       end

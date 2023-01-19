@@ -112,8 +112,8 @@ Rails.application.configure do
   # Debug is the default log_level, but can be changed per environment.
   config.log_level = :debug
 
-  # Uncomment if you wish to allow Action Cable access from any origin.
-  # config.action_cable.disable_request_forgery_protection = true
+  # This will disable request forgery protection in development
+  config.action_controller.allow_forgery_protection = false
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new($stdout)

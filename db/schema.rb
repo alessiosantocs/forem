@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_051835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_stat_statements"
@@ -140,6 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
     t.boolean "show_comments", default: true
     t.text "slug"
     t.string "social_image"
+    t.bigint "space_id"
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "user_id"
@@ -167,6 +168,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
     t.index ["published_at"], name: "index_articles_on_published_at"
     t.index ["reading_list_document"], name: "index_articles_on_reading_list_document", using: :gin
     t.index ["slug", "user_id"], name: "index_articles_on_slug_and_user_id", unique: true
+    t.index ["space_id"], name: "index_articles_on_space_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
@@ -1038,6 +1040,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
     t.index ["var"], name: "index_site_configs_on_var", unique: true
   end
 
+  create_table "spaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "default"
+    t.string "description"
+    t.boolean "limit_post_creation_to_admins"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tag_adjustments", force: :cascade do |t|
     t.string "adjustment_type"
     t.bigint "article_id"
@@ -1140,6 +1151,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["blocked_id", "blocker_id"], name: "index_user_blocks_on_blocked_id_and_blocker_id", unique: true
+  end
+
+  create_table "user_spaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "space_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["space_id"], name: "index_user_spaces_on_space_id"
+    t.index ["user_id"], name: "index_user_spaces_on_user_id"
   end
 
   create_table "user_subscriptions", force: :cascade do |t|
@@ -1341,6 +1361,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
   add_foreign_key "api_secrets", "users", on_delete: :cascade
   add_foreign_key "articles", "collections", on_delete: :nullify
   add_foreign_key "articles", "organizations", on_delete: :nullify
+  add_foreign_key "articles", "spaces", on_delete: :cascade
   add_foreign_key "articles", "users", on_delete: :cascade
   add_foreign_key "audit_logs", "users"
   add_foreign_key "badge_achievements", "badges"
@@ -1405,6 +1426,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_133328) do
   add_foreign_key "tweets", "users", on_delete: :nullify
   add_foreign_key "user_blocks", "users", column: "blocked_id"
   add_foreign_key "user_blocks", "users", column: "blocker_id"
+  add_foreign_key "user_spaces", "spaces"
+  add_foreign_key "user_spaces", "users"
   add_foreign_key "user_subscriptions", "users", column: "author_id"
   add_foreign_key "user_subscriptions", "users", column: "subscriber_id"
   add_foreign_key "users_notification_settings", "users"
