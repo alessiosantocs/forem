@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_051835) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_035959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_stat_statements"
@@ -1047,6 +1047,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_051835) do
     t.boolean "limit_post_creation_to_admins"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.string "welcome_thread_path"
   end
 
   create_table "tag_adjustments", force: :cascade do |t|

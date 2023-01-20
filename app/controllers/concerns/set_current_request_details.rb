@@ -36,8 +36,8 @@ module SetCurrentRequestDetails
   end
 
   def space_from_param
-    return unless (space_id = params[:space_id].presence)
-    Space.find_by(id: space_id)
+    # return unless (space_id = params[:space_id].presence)
+    # Space.find_by(id: space_id)
   end
 
   def fallback_account

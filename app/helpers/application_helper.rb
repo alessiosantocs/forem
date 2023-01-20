@@ -233,6 +233,9 @@ module ApplicationHelper
   end
 
   def release_adjusted_cache_key(path)
+    current_space_key = "-space-#{current_space.id}" rescue ""
+    path = "#{path}#{current_space_key}"
+
     release_footprint = ForemInstance.deployed_at
     return path if release_footprint.blank?
 
