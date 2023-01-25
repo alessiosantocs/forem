@@ -42,6 +42,10 @@ module Constants
             description: I18n.t("lib.constants.settings.general.ga_analytics_4.description"),
             placeholder: ""
           },
+          custom_scripts_header: {
+            description: I18n.t("lib.constants.settings.general.custom_scripts_header.description"),
+            placeholder: ""
+          },
           health_check_token: {
             description: I18n.t("lib.constants.settings.general.health.description"),
             placeholder: I18n.t("lib.constants.settings.general.health.placeholder")

@@ -43,6 +43,8 @@
       <meta property="forem:name" content="<%= community_name %>" />
       <meta property="forem:logo" content="<%= optimized_image_url(Settings::General.logo_png, width: 512, fetch_format: "png") %>" />
       <meta property="forem:domain" content="<%= Settings::General.app_domain %>" />
+
+      <%= Settings::General.custom_scripts_header.to_s.html_safe %>
     <% end %>
   </head>
   <% unless internal_navigation? %>

@@ -25,6 +25,9 @@ module Settings
     setting :ga_tracking_id, type: :string, default: ApplicationConfig["GA_TRACKING_ID"]
     setting :ga_analytics_4_id, type: :string, default: ApplicationConfig["GA_ANALYTICS_4_ID"]
 
+    # Custom scripts
+    setting :custom_scripts_header, type: :string
+
     # Ahoy Tracking
     setting :ahoy_tracking, type: :boolean, default: false
 
