@@ -4,6 +4,9 @@ module Admin
     before_action :assign_help_url
     after_action :verify_authorized
 
+    # This will ensure we see all Articles and not just the ones from the current_space
+    around_action :without_tenant
+
     HELP_URLS = {
       articles: "https://admin.forem.com/docs/forem-basics/posts",
       badges: "https://admin.forem.com/docs/forem-basics/badges",
@@ -35,5 +38,13 @@ module Admin
     def assign_help_url
       @help_url = HELP_URLS[controller_name.to_sym]
     end
+
+        # Allow the admin area to view all records
+    def without_tenant
+      ActsAsTenant.without_tenant do
+        yield
+      end
+    end
+
   end
 end

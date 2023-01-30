@@ -50,16 +50,12 @@ function renderTagsFollowed(user = userData()) {
 }
 
 function renderSpaceSwitch(user = userData()) {
-  const spaceSwitchContainer = document.getElementById(
-    'space-switch-container',
-  );
+  const spaceSwitchNavs = document.querySelectorAll('.space-switch-nav');
+  const spaceSwitchContainers = document.querySelectorAll('.space-switch-container');
 
-  const spaceSwitchNav = document.getElementById(
-    'space-switch-nav',
-  );
-
-  if (user === null || !spaceSwitchContainer) {
+  if (user === null || spaceSwitchContainers.length == 0) {
     // Return and do not render if the user is not logged in
+    // or if only one space or less
     // or if this is not the home page.
     return false;
   }
@@ -67,12 +63,18 @@ function renderSpaceSwitch(user = userData()) {
   const { spaces, current_space_id } = user; // eslint-disable-line camelcase
   const userSpaces = JSON.parse(spaces);
 
-  // if more than one space remove class hidden from space-switch-nav
-  if (userSpaces.length > 1) {
-    spaceSwitchNav.classList.remove('hidden');
+  if (userSpaces.length <= 1) {
+    // Return and do not render if only one space
+    return false;
   }
 
-  render(<SpaceSwitch spaces={userSpaces} currentSpaceId={current_space_id} />, spaceSwitchContainer);
+  spaceSwitchNavs.forEach((spaceSwitchNav) => {
+    spaceSwitchNav.classList.remove('hidden');
+  });
+
+  spaceSwitchContainers.forEach((spaceSwitchContainer) => {
+    render(<SpaceSwitch spaces={userSpaces} currentSpaceId={current_space_id} />, spaceSwitchContainer);
+  });
 }
 
 // Temporary Ahoy Stats for usage reports
