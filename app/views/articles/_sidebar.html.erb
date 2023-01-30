@@ -2,6 +2,20 @@
   <aside class="side-bar" aria-label="Primary sidebar">
     <% cache(release_adjusted_cache_key("main-sidebar-nav--#{user_signed_in?}"), expires_in: 15.minutes) do %>
       <%= render partial: "shared/auth_widget", locals: { tracking_id: "ca_left_sidebar_home_page", source: "left_sidebar" } unless user_signed_in? %>
+
+      <nav class="hidden" id="space-switch-nav">
+        <header class="pt-2 pl-3 pb-0 pr-0 flex items-center justify-between">
+          <h2 class="crayons-subtitle-3"><%= t("views.main.spaces.my_spaces", default: "Spaces") %></h2>
+        </header>
+        <div id="space-switch-container" class="space-switch-container mb-4"></div>
+        
+        <h2 class="crayons-subtitle-3 py-2 pl-3"><%= t("views.main.spaces.main_nav", default: "Navigation") %></h2>
+      </nav>
+
+      <style type="text/css">
+        .space-switch-container .active{text-decoration: underline;}
+      </style>
+
       <%= render partial: "layouts/main_nav", locals: { context: "sidebar" } %>
       <%= render "layouts/sidebar_tags" %>
       <%# the pattern .present?/.each has the advantage of issuing only a single SQL query to load objects in memory %>

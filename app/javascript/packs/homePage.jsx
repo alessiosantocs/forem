@@ -1,6 +1,7 @@
 import { h, render } from 'preact';
 import ahoy from 'ahoy.js';
 import { TagsFollowed } from '../leftSidebar/TagsFollowed';
+import { SpaceSwitch } from '../leftSidebar/SpaceSwitch';
 import { trackCreateAccountClicks } from '@utilities/ahoy/trackEvents';
 
 /* global userData */
@@ -46,6 +47,32 @@ function renderTagsFollowed(user = userData()) {
 
   render(<TagsFollowed tags={followedTags} />, tagsFollowedContainer);
   trackTagCogIconClicks();
+}
+
+function renderSpaceSwitch(user = userData()) {
+  const spaceSwitchContainer = document.getElementById(
+    'space-switch-container',
+  );
+
+  const spaceSwitchNav = document.getElementById(
+    'space-switch-nav',
+  );
+
+  if (user === null || !spaceSwitchContainer) {
+    // Return and do not render if the user is not logged in
+    // or if this is not the home page.
+    return false;
+  }
+
+  const { spaces, current_space_id } = user; // eslint-disable-line camelcase
+  const userSpaces = JSON.parse(spaces);
+
+  // if more than one space remove class hidden from space-switch-nav
+  if (userSpaces.length > 1) {
+    spaceSwitchNav.classList.remove('hidden');
+  }
+
+  render(<SpaceSwitch spaces={userSpaces} currentSpaceId={current_space_id} />, spaceSwitchContainer);
 }
 
 // Temporary Ahoy Stats for usage reports
@@ -113,6 +140,7 @@ if (!document.getElementById('featured-story-marker')) {
       });
 
       renderTagsFollowed();
+      renderSpaceSwitch();
       renderSidebar();
     }
   }, 2);
@@ -125,6 +153,7 @@ InstantClick.on('change', () => {
   }
 
   renderTagsFollowed();
+  renderSpaceSwitch();
   renderSidebar();
 });
 InstantClick.init();

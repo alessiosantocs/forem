@@ -59,6 +59,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :spaces, only: [:show]
+
     namespace :notifications do
       resources :counts, only: [:index]
       resources :reads, only: [:create]

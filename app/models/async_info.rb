@@ -34,6 +34,7 @@ class AsyncInfo
       name: user.name,
       username: user.username,
       profile_image_90: user.profile_image_url_for(length: 90),
+      spaces: user.cached_spaces.to_json,
       followed_tags: user.cached_followed_tags.to_json,
       followed_podcast_ids: user.cached_following_podcasts_ids,
       reading_list_ids: user.cached_reading_list_article_ids,

@@ -10,6 +10,21 @@
 
     <div class="p-2" id="authentication-hamburger-actions">
       <%= render partial: "shared/auth_widget", locals: { tracking_id: "ca_hamburger_home_page", source: "mobile_hamburger_nav" } unless user_signed_in? %>
+
+      <nav class="hidden" id="space-switch-nav">
+        <header class="pt-2 pl-3 pb-0 pr-0 flex items-center justify-between">
+          <h2 class="crayons-subtitle-3"><%= t("views.main.spaces.my_spaces", default: "Spaces") %></h2>
+        </header>
+        <div id="space-switch-container" class="space-switch-container mb-4"></div>
+        
+        <h2 class="crayons-subtitle-3 py-2 pl-3"><%= t("views.main.spaces.main_nav", default: "Navigation") %></h2>
+      </nav>
+
+      <style type="text/css">
+        .space-switch-container .active{text-decoration: underline;}
+      </style>
+
+
       <%= render partial: "layouts/main_nav", locals: { context: "hamburger" } %>
     </div>
   </div>

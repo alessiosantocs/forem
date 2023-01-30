@@ -28,6 +28,10 @@ module UserSpaces
     end
   end
 
+  def spaces_count
+    spaces.count
+  end
+
 
   private
 

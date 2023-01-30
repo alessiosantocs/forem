@@ -41,9 +41,9 @@ class AsyncInfoController < ApplicationController
   #       decorated version of the user.  It would be nice if we were using the same "variable" for
   #       the cache key and for that which we cache.
   def user_data
-    Rails.cache.fetch(user_cache_key, expires_in: NUMBER_OF_MINUTES_FOR_CACHE_EXPIRY.minutes) do
+    (Rails.cache.fetch(user_cache_key, expires_in: NUMBER_OF_MINUTES_FOR_CACHE_EXPIRY.minutes) do
       AsyncInfo.to_hash(user: @user, context: self)
-    end.to_json
+    end).merge({current_space_id: Current.space&.id}).to_json
   end
 
   def user_is_a_creator
@@ -52,6 +52,7 @@ class AsyncInfoController < ApplicationController
 
   def user_cache_key
     "user-info-#{current_user&.id}__
+    spaces-#{current_user&.spaces_count}__
     space_#{Current.space&.id}__
     #{current_user&.last_sign_in_at}__
     #{current_user&.following_tags_count}__

@@ -54,6 +54,15 @@ class UserDecorator < ApplicationDecorator
     end
   end
 
+  # Return the cached spaces the user has access to
+  #
+  # @return [Array<Space>]
+  def cached_spaces
+    Rails.cache.fetch("user-#{id}-#{spaces.count}/spaces", expires_in: 20.hours) do
+      spaces.order(default: :asc).map { |space| space.slice(:id, :name, :default) }
+    end
+  end
+
   def darker_color(adjustment = 0.88)
     Color::CompareHex.new([enriched_colors[:bg], enriched_colors[:text]]).brightness(adjustment)
   end
