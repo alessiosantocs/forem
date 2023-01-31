@@ -7,9 +7,11 @@ module Api
         user = nil
         # NOTE: We can add an inviting user here, e.g. User.invite!(current_user, user_params).
         if user_params[:password].present?
-          user=User.create!(user_params)
+          user = User.new(user_params)
+          user.skip_confirmation_notification! # Without this the user will get an email
+          user.save!
         else
-          user=User.invite!(user_params)
+          user = User.invite!(user_params)
         end
 
         render json: user
