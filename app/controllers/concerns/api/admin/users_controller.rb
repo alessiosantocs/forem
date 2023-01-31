@@ -19,7 +19,7 @@ module Api
 
       def add_to_space
         if params[:user_id] == 'by_email'
-          @user_to_add_to_space = User.find_by_email!(params.require(:email))
+          @user_to_add_to_space = User.find_by_email!(params_email)
         else
           @user_to_add_to_space = User.find(params[:user_id])
         end
@@ -31,7 +31,7 @@ module Api
 
       def banish
         if params[:user_id] == 'by_email'
-          @user_to_banish = User.find_by_email!(params.require(:email))
+          @user_to_banish = User.find_by_email!(params_email)
         else
           @user_to_banish = User.find(params[:user_id])
         end
@@ -42,7 +42,7 @@ module Api
 
       def full_delete
         if params[:user_id] == 'by_email'
-          @user_to_delete = User.find_by_email!(params.require(:email))
+          @user_to_delete = User.find_by_email!(params_email)
         else
           @user_to_delete = User.find(params[:user_id])
         end
@@ -54,6 +54,11 @@ module Api
 
       private
 
+      # Method that returns email from params lowercase.
+      def params_email
+        params.require(:email).downcase
+      end
+
       # Given that we expect creators to use tools (e.g. their existing SSO,
       # Zapier, etc) to post to this endpoint I wanted to keep the param
       # structure as simple and flat as possible, hence slightly more manual
@@ -63,7 +68,7 @@ module Api
       def user_params
         if params[:password].present?
           {
-            email: params.require(:email),
+            email: params_email,
             name: params[:name],
             username: params[:username] || params[:email],
             password: params[:password],
