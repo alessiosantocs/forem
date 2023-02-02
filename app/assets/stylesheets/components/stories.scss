@@ -23,14 +23,14 @@
   }
 
   --story-padding: var(--su-4) var(--su-4) var(--su-3);
-  --title-font-size: var(--fs-xl);
+  --title-font-size: var(--fs-lg);
 
   @media (min-width: $breakpoint-s) {
     --story-padding: var(--su-4);
-    --title-font-size: var(--fs-2xl);
+    --title-font-size: var(--fs-xl);
 
     &--featured {
-      --title-font-size: var(--fs-3xl);
+      --title-font-size: var(--fs-2xl);
     }
   }
 

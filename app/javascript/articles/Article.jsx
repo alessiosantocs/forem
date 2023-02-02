@@ -48,7 +48,7 @@ export const Article = ({
   // pinned article can have a cover image
   showCover = showCover || (article.pinned && article.main_image);
 
-  let showTitle = feedStyle !== 'facebook';
+  let showTitle = true; //feedStyle !== 'facebook';
   let showBody = feedStyle === 'facebook';
 
   return (
