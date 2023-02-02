@@ -1,4 +1,4 @@
-<% cache("user-profile-comments-#{@user.last_comment_at}-#{@user.id}-#{@comments.size}", expires_in: 2.days) do %>
+<% cache("user-profile-comments-spaces_#{@user.spaces_count}-space_#{Current.space&.id}-#{@user.last_comment_at}-#{@user.id}-#{@comments.size}", expires_in: 2.days) do %>
   <div class="profile-comment-card crayons-card mt-2 m:mt-0 mb-2">
     <% if @comments.present? %>
       <% if params[:view] == "comments" %>
