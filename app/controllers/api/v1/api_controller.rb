@@ -1,6 +1,9 @@
 module Api
   module V1
     class ApiController < ApplicationController
+      # This will ensure we see all Articles and not just the ones from the current_space
+      around_action :without_tenant
+
       # Custom MIME Type - /config/initializers/mime_types.rb
       respond_to :api_v1
 
@@ -118,6 +121,14 @@ module Api
         secure_secret = ActiveSupport::SecurityUtils.secure_compare(api_secret.secret, api_key)
         return api_secret.user if secure_secret
       end
+
+      # Allow the api to view all records
+      def without_tenant
+        ActsAsTenant.without_tenant do
+          yield
+        end
+      end
+
     end
   end
 end
